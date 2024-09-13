@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Icons } from "@/components/icons";
 import {
   Dialog,
   DialogClose,
@@ -10,6 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+import EditSpeciesDialogue from "./edit-species-dialogue";
+import DeleteSpeciesDialogue from "./delete-species-dialogue";
 
 import { useState, type BaseSyntheticEvent } from "react";
 
@@ -66,9 +70,19 @@ export default function AddSpeciesDialog({ species, userId, profiles }: { specie
             <div className="mt-4 text-center">
             <p>{"Description by: " + (authorProfile ? authorProfile.display_name : "Unknown Author")}</p>
             </div>
-            <DialogClose asChild>
-            <Button variant="secondary" className="mt-4">Close</Button>
-            </DialogClose>
+            {userId === species.author ? 
+            (
+                <div className="flex">
+                    <EditSpeciesDialogue key={species.id} species={species} userId={userId} profiles={profiles} />
+                    <DeleteSpeciesDialogue key={species.id} species={species} userId={userId} profiles={profiles} />
+                </div>
+            ) : 
+            (
+            <Button variant="secondary">
+                <Icons.settings className="mr-3 h-5 w-5 text-red-500" />
+                <div className="text-red-500">You Cannot Edit This Fine Specimen!</div>
+            </Button>
+            )}
         </DialogContent>
         </Dialog>
     );
