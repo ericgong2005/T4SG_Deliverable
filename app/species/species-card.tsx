@@ -10,14 +10,14 @@ on the client-side to correctly match component state and props should the order
 React server components don't track state between rerenders, so leaving the uniquely identified components (e.g. SpeciesCard)
 can cause errors with matching props and state in child components if the list order changes.
 */
-
 import type { Database } from "@/lib/schema";
 import Image from "next/image";
 import SpeciesCardInfo from "./species-card-info";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
+type Profiles = Database["public"]["Tables"]["profiles"]["Row"][];
 
-export default function SpeciesCard({ species, userId }: { species: Species; userId: string }) {
+export default function SpeciesCard({ species, userId, profiles }: { species: Species; userId: string; profiles: Profiles }) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow flex flex-col justify-between">
       {species.image && (
@@ -28,7 +28,7 @@ export default function SpeciesCard({ species, userId }: { species: Species; use
       <h3 className="mt-3 text-2xl font-semibold">{species.scientific_name}</h3>
       <h4 className="text-lg font-light italic">{species.common_name}</h4>
       <p>{species.description ? species.description.slice(0, 150).trim() + "..." : ""}</p>
-      <SpeciesCardInfo key={species.id} species={species} userId={userId} />
+      <SpeciesCardInfo key={species.id} species={species} userId={userId} profiles={profiles} />
     </div>
   );
 }

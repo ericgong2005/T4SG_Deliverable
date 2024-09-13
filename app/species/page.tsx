@@ -21,6 +21,9 @@ export default async function SpeciesList() {
   const sessionId = session.user.id;
 
   const { data: species } = await supabase.from("species").select("*").order("id", { ascending: false });
+  const { data: profiles } = await supabase.from("profiles").select("*").order("id", { ascending: false });
+
+  const isProfiles = profiles ?? [];
 
   return (
     <>
@@ -30,7 +33,7 @@ export default async function SpeciesList() {
       </div>
       <Separator className="my-4" />
       <div className="flex flex-wrap justify-center">
-        {species?.map((species) => <SpeciesCard key={species.id} species={species} userId={sessionId}/>)}
+        {species?.map((species) => <SpeciesCard key={species.id} species={species} userId={sessionId} profiles={isProfiles}/>)}
       </div>
     </>
   );
