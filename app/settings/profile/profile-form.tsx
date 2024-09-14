@@ -25,6 +25,28 @@ const profileFormSchema = z.object({
       message: "Username must not be longer than 30 characters.",
     })
     .transform((val) => val.trim()),
+  firstname: z
+    .string()
+    .min(2, {
+      message: "Username must be at least 2 characters.",
+    })
+    .max(30, {
+      message: "Username must not be longer than 30 characters.",
+    })
+    .nullable()
+    // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
+    .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
+  lastname: z
+    .string()
+    .min(2, {
+      message: "Username must be at least 2 characters.",
+    })
+    .max(30, {
+      message: "Username must not be longer than 30 characters.",
+    })
+    .nullable()
+    // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
+    .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
   bio: z
     .string()
     .max(160, {
@@ -45,6 +67,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
   // Set default values for the form (on open) to the existing profile data which was passed in as a prop
   const defaultValues = {
     username: profile.display_name,
+    firstname: profile.first_name,
+    lastname: profile.last_name,
     bio: profile.biography,
   };
 
@@ -64,7 +88,7 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     const supabase = createBrowserSupabaseClient();
     const { error } = await supabase
       .from("profiles")
-      .update({ biography: data.bio, display_name: data.username })
+      .update({ biography: data.bio, display_name: data.username, first_name: data.firstname, last_name: data.lastname })
       .eq("id", profile.id);
 
     // Catch and report errors from Supabase and exit the onSubmit function with an early 'return' if an error occurred.
@@ -120,6 +144,38 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               </FormControl>
               <FormDescription>
                 This is your public display name. It can be your real name or a pseudonym.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="firstname"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>First Name</FormLabel>
+              <FormControl>
+                {/* Set inputs to readOnly (boolean prop) depending on toggleable value of isEditing */}
+                <Input placeholder="First Name" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your First Name
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="lastname"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Last Name</FormLabel>
+              <FormControl>
+                {/* Set inputs to readOnly (boolean prop) depending on toggleable value of isEditing */}
+                <Input placeholder="Last Name" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your Last Name
               </FormDescription>
               <FormMessage />
             </FormItem>

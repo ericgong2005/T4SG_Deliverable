@@ -8,19 +8,25 @@ export type Database = {
           biography: string | null;
           display_name: string;
           email: string;
+          first_name: string | null;
           id: string;
+          last_name: string | null;
         };
         Insert: {
           biography?: string | null;
           display_name: string;
           email: string;
+          first_name?: string | null;
           id: string;
+          last_name?: string | null;
         };
         Update: {
           biography?: string | null;
           display_name?: string;
           email?: string;
+          first_name?: string | null;
           id?: string;
+          last_name?: string | null;
         };
         Relationships: [
           {

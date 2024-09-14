@@ -8,3 +8,7 @@
     1. Prevent non-author users from editing
 4. Delete Species
     1. Prevent non-author users from deleting
+5. Add Author Real name to database
+    1. Display Authro real name in profile drop down
+    2. Add ability to edit name
+    

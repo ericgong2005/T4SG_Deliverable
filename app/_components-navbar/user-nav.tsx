@@ -43,8 +43,11 @@ export default function UserNav({ profile }: { profile: Profile }) {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{profile.display_name}</p>
-            <p className="text-xs leading-none text-muted-foreground">{profile.email}</p>
+          <p className="text-sm font-bold text-blue-600 text-xl leading-none">
+              {profile.first_name + " " + profile.last_name}
+          </p>
+          <p className="text-sm font-medium leading-none">{profile.display_name}</p>
+          <p className="text-xs leading-none text-muted-foreground">{profile.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
