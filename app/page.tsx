@@ -5,19 +5,21 @@ export default function Home() {
   return (
     <>
       <TypographyH2>
-        Welcome to T4SG <span className="text-green-400">Biodiversity Hub</span>!
+        Welcome to <span className="text-blue-400">Eric Gong&apos;s</span> T4SG <span className="text-green-400">Biodiversity Hub</span>!
       </TypographyH2>
       <TypographyP>
         Biodiversity Hub is a web-app that allows users to post information about different species and stay educated on
         biodiversity across the globe. Users sign into the app and add cards that contain data on the species&apos;
         name, description, population, and more.
       </TypographyP>
-      <TypographyP>To see the species page, log in in the top right!</TypographyP>
+      <TypographyP>To see the species and member pages, log in in the top right!</TypographyP>
       <Separator className="my-4" />
       <TypographyP>
-        Biodiversity Hub was created as an example webapp for T4SG&apos;s Spring 2024 applications.
+        Code can be found at https://github.com/ericgong2005/T4SG_Deliverable
       </TypographyP>
-      <TypographyP>Good luck! We can&apos;t wait to see what you create :)</TypographyP>
+      <TypographyP>
+        Look at Features.md to see implemented features!
+      </TypographyP>
     </>
   );
 }
