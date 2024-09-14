@@ -11,33 +11,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { createBrowserSupabaseClient } from "@/lib/client-utils";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState, type BaseSyntheticEvent } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useState } from "react";
 
 import type { Database } from "@/lib/schema";
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
-type Profiles = Database["public"]["Tables"]["profiles"]["Row"][];
 
-export default function DeleteSpeciesDialog({ species, userId, profiles }: { species: Species; userId: string; profiles: Profiles }) {
+export default function DeleteSpeciesDialog({ species }: { species: Species }) {
   const router = useRouter();
 
   // Control open/closed state of the dialog
   const [open, setOpen] = useState<boolean>(false);
-
-  // Instantiate form functionality with React Hook Form, passing in the Zod schema (for validation) and default values
-  const form = useForm<FormData>({
-    mode: "onChange",
-  });
 
   const onSubmit = async () => {
     const supabase = createBrowserSupabaseClient();
@@ -82,7 +69,7 @@ export default function DeleteSpeciesDialog({ species, userId, profiles }: { spe
           </DialogHeader>
           <div className="grid w-full items-center gap-4">
             <div className="flex">
-              <Button onClick={onSubmit} className="ml-1 mr-1 flex-auto bg-red-600 hover:bg-red-800">
+              <Button onClick={() => void onSubmit()} className="ml-1 mr-1 flex-auto bg-red-600 hover:bg-red-800">
                 Delete 
               </Button>
               <DialogClose asChild>

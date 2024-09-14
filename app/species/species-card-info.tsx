@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -15,7 +14,7 @@ import {
 import EditSpeciesDialogue from "./edit-species-dialogue";
 import DeleteSpeciesDialogue from "./delete-species-dialogue";
 
-import { useState, type BaseSyntheticEvent } from "react";
+import { useState } from "react";
 
 
 import type { Database } from "@/lib/schema";
@@ -75,8 +74,8 @@ export default function AddSpeciesDialog({ species, userId, profiles }: { specie
             {userId === species.author ? 
             (
                 <div className="flex">
-                    <EditSpeciesDialogue key={species.id} species={species} userId={userId} profiles={profiles} />
-                    <DeleteSpeciesDialogue key={species.id} species={species} userId={userId} profiles={profiles} />
+                    <EditSpeciesDialogue key={species.id} species={species} />
+                    <DeleteSpeciesDialogue key={species.id} species={species} />
                 </div>
             ) : 
             (

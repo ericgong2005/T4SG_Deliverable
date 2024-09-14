@@ -16,9 +16,6 @@ export default async function SpeciesList() {
     redirect("/");
   }
 
-  // Obtain the ID of the currently signed-in user
-  const sessionId = session.user.id;
-
   const { data: profiles } = await supabase.from("profiles").select("*").order("id", { ascending: false });
 
   const isProfiles = profiles ?? [];
@@ -30,7 +27,7 @@ export default async function SpeciesList() {
       </div>
       <Separator className="my-4" />
       <div className="flex flex-wrap justify-center">
-        {isProfiles?.map((isProfiles) => <MemberCard key={isProfiles.id} profile={isProfiles} userId={sessionId}/>)}
+        {isProfiles?.map((isProfiles) => <MemberCard key={isProfiles.id} profile={isProfiles} />)}
       </div>
     </>
   );

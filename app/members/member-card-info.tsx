@@ -1,10 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -12,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { useState, type BaseSyntheticEvent } from "react";
+import { useState } from "react";
 
 
 import type { Database } from "@/lib/schema";
@@ -20,7 +18,7 @@ import Image from "next/image";
 
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
-export default function AddSpeciesDialog({ profile, userId }: { profile: Profile; userId: string}) {
+export default function AddSpeciesDialog({ profile }: { profile: Profile}) {
 
     // Control open/closed state of the dialog
     const [open, setOpen] = useState<boolean>(false);

@@ -69,9 +69,8 @@ Read more here: https://legacy.react-hook-form.com/api/useform/
 */
 
 type Species = Database["public"]["Tables"]["species"]["Row"];
-type Profiles = Database["public"]["Tables"]["profiles"]["Row"][];
 
-export default function AddSpeciesDialog({ species, userId, profiles }: { species: Species; userId: string; profiles: Profiles }) {
+export default function AddSpeciesDialog({ species }: { species: Species }) {
   const router = useRouter();
 
   // Control open/closed state of the dialog

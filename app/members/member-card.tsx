@@ -16,7 +16,7 @@ import MemberCardInfo from "./member-card-info";
 
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
-export default function SpeciesCard({ profile, userId }: { profile: Profile; userId: string}) {
+export default function SpeciesCard({ profile }: { profile: Profile }) {
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow flex flex-col justify-between">
       {profile.image && (
@@ -27,7 +27,7 @@ export default function SpeciesCard({ profile, userId }: { profile: Profile; use
       <h3 className="mt-3 text-2xl font-semibold">{(profile.first_name ?? profile.display_name) + " " +  (profile.last_name ?? "")}</h3>
       <h4 className="text-lg font-light italic">{profile.display_name}</h4>
       <p>{profile.biography ? profile.biography.slice(0, 150).trim() + "..." : ""}</p>
-      <MemberCardInfo key={profile.id} profile={profile} userId={userId}  />
+      <MemberCardInfo key={profile.id} profile={profile} />
     </div>
   );
 }
