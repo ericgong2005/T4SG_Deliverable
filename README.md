@@ -1,4 +1,4 @@
-# Eric Gong T4SG Fall 2024 Application Deliverable[https://t4sgdeliverable.vercel.app/]:
+# [Eric Gong T4SG Fall 2024 Application Deliverable](https://t4sgdeliverable.vercel.app/):
 
 - [T4SG Fall 2024 Application Deliverable](#t4sg-spring-2024-application-deliverable)
   - [Introduction](#introduction)
