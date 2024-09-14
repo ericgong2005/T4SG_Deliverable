@@ -47,10 +47,16 @@ const profileFormSchema = z.object({
     .nullable()
     // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
     .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
+  image: z
+    .string()
+    .url()
+    .nullable()
+    // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
+    .transform((val) => (!val || val.trim() === "" ? null : val.trim())),
   bio: z
     .string()
-    .max(160, {
-      message: "Biography cannot be longer than 160 characters.",
+    .max(500, {
+      message: "Biography cannot be longer than 500 characters.",
     })
     .nullable()
     // Transform empty string or only whitespace input to null before form submission, and trim whitespace otherwise
@@ -69,6 +75,7 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     username: profile.display_name,
     firstname: profile.first_name,
     lastname: profile.last_name,
+    image: profile.image,
     bio: profile.biography,
   };
 
@@ -88,7 +95,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     const supabase = createBrowserSupabaseClient();
     const { error } = await supabase
       .from("profiles")
-      .update({ biography: data.bio, display_name: data.username, first_name: data.firstname, last_name: data.lastname })
+      .update({ biography: data.bio, display_name: data.username, first_name: data.firstname, 
+          last_name: data.lastname, image: data.image})
       .eq("id", profile.id);
 
     // Catch and report errors from Supabase and exit the onSubmit function with an early 'return' if an error occurred.
@@ -180,6 +188,27 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               <FormMessage />
             </FormItem>
           )}
+        />
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => {
+            // We must extract value from field and convert a potential defaultValue of `null` to "" because inputs can't handle null values: https://github.com/orgs/react-hook-form/discussions/4091
+            const { value, ...rest } = field;
+            return (
+              <FormItem>
+                <FormLabel>Profile Image URL</FormLabel>
+                <FormControl>
+                  <Input
+                    value={value ?? ""}
+                    placeholder="Your Image Here!"
+                    {...rest}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
         <FormItem>
           <FormLabel>Email</FormLabel>

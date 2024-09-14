@@ -10,6 +10,7 @@ export type Database = {
           email: string;
           first_name: string | null;
           id: string;
+          image: string | null;
           last_name: string | null;
         };
         Insert: {
@@ -18,6 +19,7 @@ export type Database = {
           email: string;
           first_name?: string | null;
           id: string;
+          image?: string | null;
           last_name?: string | null;
         };
         Update: {
@@ -26,6 +28,7 @@ export type Database = {
           email?: string;
           first_name?: string | null;
           id?: string;
+          image?: string | null;
           last_name?: string | null;
         };
         Relationships: [

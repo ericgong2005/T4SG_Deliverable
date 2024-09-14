@@ -9,6 +9,10 @@
 4. Delete Species
     1. Prevent non-author users from deleting
 5. Add Author Real name to database
-    1. Display Authro real name in profile drop down
+    1. Display Author real name in profile drop down
     2. Add ability to edit name
-    
+    3. Display author full name on species card
+6. Add a page to list all memebers
+    1. Added profile images and display them
+    2. Add a more info button and info card to display full biography
+

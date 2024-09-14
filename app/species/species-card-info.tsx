@@ -68,7 +68,9 @@ export default function AddSpeciesDialog({ species, userId, profiles }: { specie
             <p>{species.description}</p>
             </div>
             <div className="mt-4 text-center">
-            <p>{"Description by: " + (authorProfile ? authorProfile.display_name : "Unknown Author")}</p>
+            <p>{"Description by: " + (authorProfile ? 
+                (authorProfile.first_name + " " + authorProfile.last_name + " (" + authorProfile.display_name + ")") 
+                : "Unknown Author")}</p>
             </div>
             {userId === species.author ? 
             (

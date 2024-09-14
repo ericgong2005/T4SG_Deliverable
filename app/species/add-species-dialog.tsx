@@ -17,9 +17,10 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { createBrowserSupabaseClient } from "@/lib/client-utils";
+import { Json } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState, type BaseSyntheticEvent } from "react";
+import { useState, useEffect, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -79,7 +80,7 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
 
   // Control open/closed state of the dialog
   const [open, setOpen] = useState<boolean>(false);
-
+  
   // Instantiate form functionality with React Hook Form, passing in the Zod schema (for validation) and default values
   const form = useForm<FormData>({
     resolver: zodResolver(speciesSchema),
@@ -170,7 +171,9 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
                     <FormItem>
                       <FormLabel>Common Name</FormLabel>
                       <FormControl>
-                        <Input value={value ?? ""} placeholder="Guinea pig" {...rest} />
+                        <Input 
+                          value={value ?? ""} placeholder="Guinea pig" {...rest} 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -258,7 +261,7 @@ export default function AddSpeciesDialog({ userId }: { userId: string }) {
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <Textarea
-                          value={value ?? ""}
+                          value={""}
                           placeholder="The guinea pig or domestic guinea pig, also known as the cavy or domestic cavy, is a species of rodent belonging to the genus Cavia in the family Caviidae."
                           {...rest}
                         />
